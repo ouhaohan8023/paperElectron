@@ -38,3 +38,15 @@ $ npm run build:linux
 
 ### Npm
 9.8.1
+
+### 引入ant-design-pro
+```
+2.0 文档地址
+https://pro.antdv.com/docs/layout
+https://preview.pro.antdv.com/dashboard/workplace
+
+3.0 文档地址（当前使用版本）
+https://www.npmjs.com/package/@ant-design-vue/pro-layout
+https://sendya.github.io/preview-pro/index.html#/welcome
+```
+
