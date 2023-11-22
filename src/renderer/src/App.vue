@@ -4,11 +4,22 @@
   </ConfigProvider>
 </template>
 
-<script setup lang="ts">
+<script setup lang='ts'>
 import { ConfigProvider } from 'ant-design-vue'
 import { useUserTheme } from './hooks/useTheme'
 
 useUserTheme()
+
+const test = async () => {
+  try {
+    // @ts-ignore (define in dts)
+    const replyMessage = await window.api.zhiwang("火药固钉器活塞复位过程动力学分析");
+    console.log('replyMessage', replyMessage); // 处理返回值
+  } catch (error) {
+    console.error('Error in sending sync message:', error);
+  }
+}
+test()
 </script>
 
 <style>

@@ -1,5 +1,6 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer  } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+// import { test } from '../api/request.js'
 
 // Custom APIs for renderer
 const api = {}
@@ -10,7 +11,18 @@ const api = {}
 if (process.contextIsolated) {
   try {
     contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
+    // contextBridge.exposeInMainWorld('api', api)
+    contextBridge.exposeInMainWorld('api', {
+      zhiwang: (data) => ipcRenderer.sendSync('render-send-sync-to-main', data),
+    })
+    // contextBridge.exposeInMainWorld('test', ipcRenderer.invoke('test'))
+    contextBridge.exposeInMainWorld('versions', {
+      node: () => process.versions.node,
+      chrome: () => process.versions.chrome,
+      electron: () => process.versions.electron,
+      ping: () => ipcRenderer.invoke('ping'),
+      // zhiwang: (data) => ipcRenderer.sendSync('render-send-sync-to-main', data),
+    })
   } catch (error) {
     console.error(error)
   }
@@ -19,4 +31,6 @@ if (process.contextIsolated) {
   window.electron = electronAPI
   // @ts-ignore (define in dts)
   window.api = api
+  // @ts-ignore (define in dts)
+  // window.test = test
 }

@@ -46,9 +46,9 @@
           <div style="height: 100%; display: flex; align-items: center">
             <a-breadcrumb>
               <a-breadcrumb-item v-for="item of breadcrumb" :key="item.path">
-<!--                <router-link :to="{ path: item.path, item: item.params }">-->
-<!--                  {{ item.breadcrumbName }}-->
-<!--                </router-link>-->
+                <!--                <router-link :to="{ path: item.path, item: item.params }">-->
+                <!--                  {{ item.breadcrumbName }}-->
+                <!--                </router-link>-->
               </a-breadcrumb-item>
             </a-breadcrumb>
           </div>
@@ -78,7 +78,9 @@ import type { RouteContextProps } from '@ant-design-vue/pro-layout'
 const loading = ref(false)
 const watermarkContent = ref('Pro Layout')
 const router = useRouter()
-const currentRouteKey = computed(() => (router.currentRoute.value.matched.concat()[1]?.name as string) || '');
+const currentRouteKey = computed(
+  () => (router.currentRoute.value.matched.concat()[1]?.name as string) || ''
+)
 const { menuData } = getMenuData(clearMenuItem(router.getRoutes()))
 // flat menus
 const routes = menuData.map((item) => {
